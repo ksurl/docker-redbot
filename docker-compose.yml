@@ -1,0 +1,15 @@
+version: "2"
+services:
+  redbot:
+    image: ksurl/redbot:latest
+    container_name: redbot
+    # 1st run setup needs to be run manually by attaching to container as runtime user
+    #command: ['tail', '-f', '/dev/null' ]
+    command: ['/bin/sh', '-c', "/usr/local/bin/redbot $INSTANCE" ]
+    environment:
+      - UID=1000
+      - GID=1000
+      - INSTANCE=docker # change to your instance name
+    volumes:
+      - redbot-data:/config # set path according to redbot-setup 1st run
+    restart: unless-stopped
