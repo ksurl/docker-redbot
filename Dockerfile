@@ -1,5 +1,7 @@
 FROM python:alpine
 
+LABEL org.opencontainers.image.source="https://github.com/ksurl/docker-redbot"
+
 LABEL maintainer="ksurl"
 
 WORKDIR /config
