@@ -8,6 +8,10 @@ WORKDIR     /config
 
 VOLUME      /config
 
+ENV         PUID=1000 \
+            PGID=1000 \
+            INSTANCE="docker"
+
 COPY        init /init
 
 RUN         chmod +x /init && \
@@ -19,15 +23,12 @@ RUN         chmod +x /init && \
             apk add --no-cache --virtual .run-deps \
                 dumb-init \
                 git \
-                openjdk11-jre-headless && \
+                openjdk11-jre-headless \
+                su-exec && \
             pip install --no-cache-dir \
                 Red-DiscordBot && \
             apk del --purge --no-cache .build-deps && \
             rm -rf /tmp/* /var/cache/apk/* /root/.cache
-
-ENV         PUID=1000 \
-            PGID=1000 \
-            INSTANCE="docker"
 
 ENTRYPOINT  [ "/usr/bin/dumb-init", "--" ]
 CMD         [ "/init" ]
