@@ -1,7 +1,7 @@
-version: "2"
+version: "3.8"
 services:
   redbot:
-    image: ksurl/redbot:latest
+    image: ghcr.io/ksurl/redbot
     container_name: redbot
     # 1st run setup needs to be run manually by attaching to container as runtime user
     #command: ['tail', '-f', '/dev/null' ]
@@ -10,5 +10,8 @@ services:
       - PGID=1000
       - INSTANCE=docker # change to your instance name
     volumes:
-      - redbot-data:/config # set path according to redbot-setup 1st run
+      - data:/config # set path according to redbot-setup 1st run
     restart: unless-stopped
+
+volumes:
+  data:

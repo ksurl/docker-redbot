@@ -22,7 +22,7 @@
 
 ## docker-compose 
 
-    version: "2"
+    version: "3.8"
     services:
       redbot:
         image: ksurl/redbot:latest
